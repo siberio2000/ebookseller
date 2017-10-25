@@ -1,5 +1,6 @@
 const express = require('express');
-const stripe = require('stripe')('sk_test_PbkZpEMdepxcoG9yGL7O3NuK');
+const keys = require('./config/keys');
+const stripe = require('stripe')(keys.stripeSecretKey);
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 
@@ -18,27 +19,29 @@ app.use(express.static(`${__dirname}/public`));
 
 // Index route
 app.get('/', (req, res) => {
-    res.render('index'); //we want to render template
+    res.render('index', {
+        stripePublishableKey : keys.stripePublishableKey
+    }); //we want to render template
 });
 
 //Charge Route
 app.post('/charge', (req, res) => {
     const amount = 2500;
 
-    console.log(req.body);
-    return res.send('TEST');
+    // console.log(req.body);
+    // return res.send('TEST');
 
-    // stripe.customers.create({
-    //         email: req.body.stripeEmail,
-    //         source: req.body.stripeToken
-    //     })
-    //     .then(customer => stripe.charges.create({
-    //         amount,
-    //         description: 'Web Development Ebook',
-    //         currency: 'GBP',
-    //         customer: customer.id
-    //     }))
-    //     .then(charge => res.render('success'));
+    stripe.customers.create({
+            email: req.body.stripeEmail,
+            source: req.body.stripeToken
+        })
+        .then(customer => stripe.charges.create({
+            amount,
+            description: 'Web Development Ebook',
+            currency: 'GBP',
+            customer: customer.id
+        }))
+        .then(charge => res.render('success'));
 });
 
 const port = process.env.PORT || 5000;
