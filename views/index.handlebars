@@ -1,16 +1,16 @@
 <section class="py-2">
     <div class="row">
         <div class="col-md-6 text-center">
-            <h1 class="display-3 mt-3 pt-5">
-                Web Development Ebook
-            </h1><p class="lead">learn web development front to back</p>
+            <h1 class="display-4 mt-3 pt-5">
+                Buy "The Ultimate Collection of Book Marketing Examples" eBook 
+            </h1><p class="lead mt-5">Please pay with dummy card number:<br> <strong>4111 1111 1111 1111 </strong></p>
             <form action="/charge" method="POST">
                 <script
                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                     data-key="{{stripePublishableKey}}"
                     data-amount="2500"
-                    data-name="Web Development Ebook"
-                    data-description="Ebook written by Roman Jasko"
+                    data-name="Buy Ebook"
+                    data-description="The Ultimate Collection of Book Marketing Examples"
                     data-image="/img/marketplace.png"
                     data-locale="auto"
                     data-zip-code="true"
@@ -18,7 +18,7 @@
                 </script>
             </form>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 mt-5">
             <img src="/img/book.png" alt="" class="img-fluid">
         </div>
     </div>
